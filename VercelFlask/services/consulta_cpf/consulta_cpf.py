@@ -3,7 +3,7 @@ import requests
 
 # Variáveis para utilização da API da Infosimples
 API_KEY = 'Yi3azCld-UKGoRdnEZBVhsNvmZ5gsJcBZLR1ROLm'
-API_URL = 'https://api.infosimples.com/consultas/docs/receita-federal/cpf'
+API_URL = 'https://api.infosimples.com/api/v2/consultas/receita-federal/cpf'  # Atualize a URL para a correta
 
 def consulta_cpf_externa(cpf):
     """
@@ -12,10 +12,11 @@ def consulta_cpf_externa(cpf):
     headers = {
         'Authorization': f'Token {API_KEY}'
     }
-    params = {
+    args = {
         'cpf': cpf,
+        'token': API_KEY,  # Token também pode ser enviado como parâmetro
     }
-    response = requests.get(API_URL, headers=headers, params=params)
+    response = requests.post(API_URL, data=args)
     if response.status_code == 200:
         return response.json()
     else:
