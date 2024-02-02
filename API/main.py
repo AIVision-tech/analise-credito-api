@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Import de bibliotecas base da API
 from flask import Flask, redirect
 from flasgger import Swagger
