@@ -1,0 +1,31 @@
+swagger: '2.0'
+info:
+  title: API de Consulta de Crédito 
+  version: 1.0.0
+  description: |
+    A **API de Consulta de Crédito** é uma solução avançada projetada para transformar a maneira como empresas e instituições financeiras avaliam o risco de crédito. Utilizando uma combinação robusta de tecnologia de ponta e dados precisos, nossa API oferece acesso instantâneo a informações detalhadas de CPF e CNPJ, possibilitando uma análise de crédito rápida, confiável e abrangente.
+
+    **Recursos Principais:**
+
+    - **Consulta Detalhada de CPF/CNPJ:** Obtenha informações essenciais, incluindo situação cadastral e dados de contato.
+    - **Integração Simples e Flexível:** Com nossa documentação clara e suporte dedicado, integrar a API ao seu sistema é rápido e fácil, oferecendo flexibilidade para se adaptar a qualquer fluxo de trabalho de crédito.
+    - **Compliance e Segurança:** Cumprimos rigorosamente com as regulamentações de proteção de dados para garantir que todas as informações sejam tratadas de forma segura e confidencial.
+
+    **Ideal para:**
+
+    - Instituições Financeiras: Bancos, cooperativas de crédito e fintechs que procuram otimizar suas avaliações de risco de crédito.
+    - Empresas de Varejo: Negócios que oferecem crédito ao consumidor e desejam minimizar riscos de inadimplência.
+    - Plataformas Online: E-commerces e serviços de assinatura buscando uma análise rápida de crédito para aprovação de novos clientes.
+
+    **Comece a Usar:**
+
+    Integrar a **API de Consulta de Crédito** ao seu sistema é o primeiro passo para transformar sua abordagem de análise de crédito. Com acesso a dados abrangentes e insights precisos, você pode otimizar suas operações de crédito, melhorar a experiência do cliente e impulsionar o crescimento do seu negócio.
+
+    Para mais informações e para começar a usar a API, visite nosso portal de desenvolvedores em [https://aivision-tech.com/](https://aivision-tech.com/).
+schemes:
+  - https
+host: aivision-tech.com
+basePath: /apidocs
+paths:
+  /consulta_cpf:
+    $ref: '.consulta_cpf.yaml'
