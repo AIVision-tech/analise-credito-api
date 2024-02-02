@@ -2,20 +2,12 @@ from flask import Flask, redirect
 from flasgger import Swagger
 import yaml
 import os
-import sys
- 
-
-# Adiciona o diretório raiz ao sys.path para permitir a importação de 'services'
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-
-# Supondo que consulta_cpf_route() esteja em services.consulta_cpf.consulta_cpf
-from services.consulta_cpf.consulta_cpf import consulta_cpf_route
 
 app = Flask(__name__)
 
 # Carregamento e combinação dos documentos Swagger
 def load_and_combine_swagger_docs(swagger_dir_path):
-    combined_docs = {"paths": {}, "definitions": {}}
+    combined_docs = {"paths": {}, "definitions": {}} 
     for root, dirs, files in os.walk(swagger_dir_path):
         for filename in files:
             if filename.endswith('.yaml') or filename.endswith('.yml'):
@@ -30,17 +22,21 @@ def load_and_combine_swagger_docs(swagger_dir_path):
     return combined_docs
 
 # Caminho para o diretório que contém os arquivos YAML da documentação Swagger
-swagger_docs_dir = os.path.join(os.path.dirname(__file__), '..', 'swagger')
+swagger_docs_dir = os.path.join(os.path.dirname(__file__), 'Swagger')
 swagger_template = load_and_combine_swagger_docs(swagger_docs_dir)
 
 swagger = Swagger(app, template=swagger_template)
+
+print("Caminho do diretório Swagger:", swagger_docs_dir)
+print("Arquivos no diretório Swagger:", os.listdir(swagger_docs_dir))
+
 
 @app.route('/')
 def index():
     return redirect("/apidocs/")
 
-app.add_url_rule('/consulta_cpf', 'consulta_cpf', consulta_cpf_route, methods=['POST'])
+# Use a porta fornecida pelo ambiente do Vercel ou padrão 5000 se não especificada
+port = int(os.environ.get("PORT", 5000))
 
 if __name__ == "__main__":
-    print("O servidor está rodando em http://127.0.0.1:5001")
-    app.run(host='0.0.0.0', port=5001)
+    app.run(host='0.0.0.0', port=port)
