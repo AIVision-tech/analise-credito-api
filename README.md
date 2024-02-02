@@ -8,13 +8,13 @@ Este projeto é licenciado sob a Licença Mozilla. Consulte o arquivo [LICENSE](
 
 ## Status do Projeto
 
-![GitHub last commit](https://img.shields.io/github/last-commit/Paulo-Reboucas-AIVision/analise-credito)
-![GitHub contributors](https://img.shields.io/github/contributors/Paulo-Reboucas-AIVision/analise-credito)
-![GitHub repo size](https://img.shields.io/github/repo-size/Paulo-Reboucas-AIVision/analise-credito)
+![GitHub last commit](https://img.shields.io/github/last-commit/AIVision-tech/analise-credito)
+![GitHub contributors](https://img.shields.io/github/contributors/AIVision-tech/analise-credito)
+![GitHub repo size](https://img.shields.io/github/repo-size/AIVision-tech/analise-credito)
 
 ## Linguagens Utilizadas
 
-![GitHub top language](https://img.shields.io/github/languages/top/Paulo-Reboucas-AIVision/analise-credito)
+![GitHub top language](https://img.shields.io/github/languages/top/AIVision-tech/analise-credito)
 
 
 ## Visão Geral
