@@ -16,6 +16,7 @@ Este projeto é licenciado sob a Licença Mozilla. Consulte o arquivo [LICENSE](
 
 ![GitHub top language](https://img.shields.io/github/languages/top/Paulo-Reboucas-AIVision/analise-credito)
 
+
 ## Visão Geral
 
 [Inserir uma breve descrição do projeto e seu propósito.]
