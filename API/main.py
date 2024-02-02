@@ -9,16 +9,18 @@ app = Flask(__name__)
 
 # Função para carregar e combinar Swagger docs de múltiplos arquivos YAML
 def load_and_combine_swagger_docs(directory_path):
-    combined_docs = {"paths": {}, "definitions": {}} 
+    combined_docs = {"paths": {}, "definitions": {}}  # Inclua outras seções necessárias aqui
     for filename in os.listdir(directory_path):
         if filename.endswith('.yaml'):
             filepath = os.path.join(directory_path, filename)
             with open(filepath, 'r') as file:
                 part = yaml.safe_load(file)
-                if "paths" in part:
-                    combined_docs["paths"].update(part["paths"])
-                if "definitions" in part:
-                    combined_docs["definitions"].update(part["definitions"])
+                # Atualize combined_docs com todo o conteúdo relevante de part
+                for key, value in part.items():
+                    if key in combined_docs:
+                        combined_docs[key].update(value)
+                    else:
+                        combined_docs[key] = value
     return combined_docs
 
 # Diretório que contém os arquivos YAML da documentação Swagger
