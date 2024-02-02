@@ -1,0 +1,102 @@
+paths:
+  /consulta_cpf:
+    post:
+      summary: Consulta de CPF
+      description: >
+        Este endpoint realiza uma consulta detalhada do CPF fornecido, buscando informações relevantes para análise de crédito. Utilize este serviço para obter dados cadastrais atualizados e indicadores financeiros que auxiliam na avaliação de risco de crédito de pessoas físicas.
+      operationId: consultaCPF
+      tags:
+        - Consultas Básicas
+      consumes:
+        - application/json
+      produces:
+        - application/json  # Mova o "produces" para este nível, ao mesmo nível que "parameters"
+      parameters:
+        - in: body
+          name: body
+          description: CPF a ser consultado
+          required: true
+          schema:
+            type: object
+            required:
+              - cpf
+            properties:
+              cpf:
+                type: string
+                example: '123.456.789-01'
+      responses:
+        200:
+          description: Informações do CPF consultado
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                example: 200
+              code_message:
+                type: string
+                example: "A requisição foi processada com sucesso."
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    ano_obito:
+                      type: string
+                      example: null
+                    consulta_comprovante:
+                      type: string
+                      example: "1111.1111.1111.1111"
+                    consulta_datahora:
+                      type: string
+                      example: "29/09/2023 13:16:08"
+                    consulta_digito_verificador:
+                      type: string
+                      example: "00"
+                    cpf:
+                      type: string
+                      example: "123.456.789-01"
+                    data_inscricao:
+                      type: string
+                      example: "11/11/1111"
+                    data_nascimento:
+                      type: string
+                      example: "11/11/1111"
+                    nome:
+                      type: string
+                      example: "Exemplo de Nome"
+                    nome_civil:
+                      type: string
+                      example: "Exemplo de Nome Civil"
+                    nome_social:
+                      type: string
+                      example: "Exemplo de Nome Social"
+                    normalizado_ano_obito:
+                      type: integer
+                      example: 0
+                    normalizado_consulta_datahora:
+                      type: string
+                      example: "29/09/2023 13:16:08"
+                    normalizado_cpf:
+                      type: string
+                      example: "12345678901"
+                    normalizado_data_inscricao:
+                      type: string
+                      example: "11/11/1111"
+                    normalizado_data_nascimento:
+                      type: string
+                      example: "11/11/1111"
+                    origem:
+                      type: string
+                      example: "mobile"
+                    qrcode_url:
+                      type: string
+                      example: "https://www.exemplo.com/exemplo-de-url"
+                    situacao_cadastral:
+                      type: string
+                      example: "ATIVA"
+                    site_receipt:
+                      type: string
+                      example: "https://www.exemplo.com/exemplo-de-url"
+        400:
+          description: Requisição inválida, CPF não fornecido ou formato inválido
