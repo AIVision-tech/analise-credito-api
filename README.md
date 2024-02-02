@@ -6,17 +6,6 @@ Este é um projeto de análise de crédito que visa avaliar a elegibilidade de i
 
 Este projeto é licenciado sob a Licença Mozilla. Consulte o arquivo [LICENSE](LICENSE) para obter mais detalhes sobre os termos da licença.
 
-## Status do Projeto
-
-![GitHub last commit](https://img.shields.io/github/last-commit/AIVision-tech/analise-credito)
-![GitHub contributors](https://img.shields.io/github/contributors/AIVision-tech/analise-credito)
-![GitHub repo size](https://img.shields.io/github/repo-size/AIVision-tech/analise-credito)
-
-## Linguagens Utilizadas
-
-![GitHub top language](https://img.shields.io/github/languages/top/AIVision-tech/analise-credito)
-
-
 ## Visão Geral
 
 [Inserir uma breve descrição do projeto e seu propósito.]
