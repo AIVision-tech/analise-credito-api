@@ -1,0 +1,129 @@
+swagger: '2.0'
+info:
+  title: API de Consulta de Crédito
+  version: 1.0.0
+  description: |
+    A **API de Consulta de Crédito** é uma solução avançada projetada para transformar a maneira como empresas e instituições financeiras avaliam o risco de crédito. Utilizando uma combinação robusta de tecnologia de ponta e dados precisos, nossa API oferece acesso instantâneo a informações detalhadas de CPF e CNPJ, possibilitando uma análise de crédito rápida, confiável e abrangente.
+
+    **Recursos Principais:**
+
+    - **Consulta Detalhada de CPF/CNPJ:** Obtenha informações essenciais, incluindo situação cadastral e dados de contato.
+    - **Integração Simples e Flexível:** Com nossa documentação clara e suporte dedicado, integrar a API ao seu sistema é rápido e fácil, oferecendo flexibilidade para se adaptar a qualquer fluxo de trabalho de crédito.
+    - **Compliance e Segurança:** Cumprimos rigorosamente com as regulamentações de proteção de dados para garantir que todas as informações sejam tratadas de forma segura e confidencial.
+
+    **Ideal para:**
+
+    - Instituições Financeiras: Bancos, cooperativas de crédito e fintechs que procuram otimizar suas avaliações de risco de crédito.
+    - Empresas de Varejo: Negócios que oferecem crédito ao consumidor e desejam minimizar riscos de inadimplência.
+    - Plataformas Online: E-commerces e serviços de assinatura buscando uma análise rápida de crédito para aprovação de novos clientes.
+
+    **Comece a Usar:**
+
+    Integrar a **API de Consulta de Crédito** ao seu sistema é o primeiro passo para transformar sua abordagem de análise de crédito. Com acesso a dados abrangentes e insights precisos, você pode otimizar suas operações de crédito, melhorar a experiência do cliente e impulsionar o crescimento do seu negócio.
+
+    Para mais informações e para começar a usar a API, visite nosso portal de desenvolvedores em [https://aivision-tech.com/](https://aivision-tech.com/).
+schemes:
+  - https
+host: aivision-tech.com
+basePath: /apidocs
+paths:
+  /consulta_cpf:
+    post:
+      summary: Consulta de CPF
+      description: |
+        Este endpoint realiza uma consulta detalhada do CPF fornecido, buscando informações relevantes para análise de crédito. Utilize este serviço para obter dados cadastrais atualizados e indicadores financeiros que auxiliam na avaliação de risco de crédito de pessoas físicas.
+      operationId: consultaCPF
+      tags:
+        - Consultas Básicas
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: CPF a ser consultado
+          required: true
+          schema:
+            type: object
+            required:
+              - cpf
+              - birthdate
+            properties:
+              cpf:
+                type: string
+                example: '123.456.789-01'
+              birthdate:
+                type: string
+                example: '1985-04-22'
+      responses:
+        200:
+          description: Informações do CPF consultado
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                example: 200
+              code_message:
+                type: string
+                example: "A requisição foi processada com sucesso."
+              data:
+                type: object
+                properties:
+                  ano_obito:
+                    type: string
+                    example: null
+                  consulta_comprovante:
+                    type: string
+                    example: "1111.1111.1111.1111"
+                  consulta_datahora:
+                    type: string
+                    example: "29/09/2023 13:16:08"
+                  consulta_digito_verificador:
+                    type: string
+                    example: "00"
+                  cpf:
+                    type: string
+                    example: "123.456.789-01"
+                  data_inscricao:
+                    type: string
+                    example: "11/11/1111"
+                  data_nascimento:
+                    type: string
+                    example: "11/11/1111"
+                  nome:
+                    type: string
+                    example: "Exemplo de Nome"
+                  nome_civil:
+                    type: string
+                    example: "Exemplo de Nome Civil"
+                  nome_social:
+                    type: string
+                    example: "Exemplo de Nome Social"
+                  normalizado_ano_obito:
+                    type: integer
+                    example: 0
+                  normalizado_consulta_datahora:
+                    type: string
+                    example: "29/09/2023 13:16:08"
+                  normalizado_cpf:
+                    type: string
+                    example: "12345678901"
+                  normalizado_data_inscricao:
+                    type: string
+                    example: "11/11/1111"
+                  normalizado_data_nascimento:
+                    type: string
+                    example: "11/11/1111"
+                  qrcode_url:
+                    type: string
+                    example: "https://www.exemplo.com/exemplo-de-url"
+                  situacao_cadastral:
+                    type: string
+                    example: "ATIVA"
+                  site_receipt:
+                    type: string
+                    example: "https://www.exemplo.com/exemplo-de-url"
+        400:
+          description: Requisição inválida, CPF ou birthdate não fornecidos ou formato inválido
