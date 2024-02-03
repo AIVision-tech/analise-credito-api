@@ -22,6 +22,7 @@ em construção
 ## Contribuição
 
 Sinta-se à vontade para contribuir para este projeto. Se você deseja reportar um problema, adicionar um recurso ou fazer melhorias, siga estas etapas:
+
 1. Fork o projeto
 2. Crie um branch com a sua feature (`git checkout -b feature/sua-feature`)
 3. Commit suas alterações (`git commit -m 'Adicione uma nova feature'`)
@@ -31,4 +32,3 @@ Sinta-se à vontade para contribuir para este projeto. Se você deseja reportar 
 ## Contato
 
 aivision-tech.com
-

@@ -1,9 +1,18 @@
 from flask import Flask, redirect
+from flask_cors import CORS
 from flasgger import Swagger
 import yaml
 import os
 
 app = Flask(__name__)
+
+cors = CORS(app, resources={
+    r"/api/*": {
+       "origins": ["http://127.0.0.1:5001", "http://localhost:3000"],
+       "methods": ["GET", "POST"],  # Métodos permitidos
+       "allow_headers": ["Content-Type", "Authorization"]
+    }
+})
 
 # Carregamento e combinação dos documentos Swagger
 def load_and_combine_swagger_docs(swagger_dir_path):
@@ -36,7 +45,7 @@ def index():
     return redirect("/apidocs/")
 
 # Use a porta fornecida pelo ambiente do Vercel ou padrão 5000 se não especificada
-port = int(os.environ.get("PORT", 5000))
+port = int(os.environ.get("PORT", 5001))
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=port)

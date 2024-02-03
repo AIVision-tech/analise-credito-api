@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  title: API de Consulta de Crédito 
+  title: API de Consulta de Crédito
   version: 1.0.0
   description: |
     A **API de Consulta de Crédito** é uma solução avançada projetada para transformar a maneira como empresas e instituições financeiras avaliam o risco de crédito. Utilizando uma combinação robusta de tecnologia de ponta e dados precisos, nossa API oferece acesso instantâneo a informações detalhadas de CPF e CNPJ, possibilitando uma análise de crédito rápida, confiável e abrangente.
@@ -27,10 +27,10 @@ schemes:
 host: aivision-tech.com
 basePath: /apidocs
 paths:
-   /consulta_cpf:
+  /consulta_cpf:
     post:
       summary: Consulta de CPF
-      description: >
+      description: |
         Este endpoint realiza uma consulta detalhada do CPF fornecido, buscando informações relevantes para análise de crédito. Utilize este serviço para obter dados cadastrais atualizados e indicadores financeiros que auxiliam na avaliação de risco de crédito de pessoas físicas.
       operationId: consultaCPF
       tags:
@@ -38,7 +38,7 @@ paths:
       consumes:
         - application/json
       produces:
-        - application/json  # Mova o "produces" para este nível, ao mesmo nível que "parameters"
+        - application/json
       parameters:
         - in: body
           name: body
@@ -48,10 +48,14 @@ paths:
             type: object
             required:
               - cpf
+              - birthdate
             properties:
               cpf:
                 type: string
                 example: '123.456.789-01'
+              birthdate:
+                type: string
+                example: '1985-04-22'
       responses:
         200:
           description: Informações do CPF consultado
@@ -65,66 +69,61 @@ paths:
                 type: string
                 example: "A requisição foi processada com sucesso."
               data:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    ano_obito:
-                      type: string
-                      example: null
-                    consulta_comprovante:
-                      type: string
-                      example: "1111.1111.1111.1111"
-                    consulta_datahora:
-                      type: string
-                      example: "29/09/2023 13:16:08"
-                    consulta_digito_verificador:
-                      type: string
-                      example: "00"
-                    cpf:
-                      type: string
-                      example: "123.456.789-01"
-                    data_inscricao:
-                      type: string
-                      example: "11/11/1111"
-                    data_nascimento:
-                      type: string
-                      example: "11/11/1111"
-                    nome:
-                      type: string
-                      example: "Exemplo de Nome"
-                    nome_civil:
-                      type: string
-                      example: "Exemplo de Nome Civil"
-                    nome_social:
-                      type: string
-                      example: "Exemplo de Nome Social"
-                    normalizado_ano_obito:
-                      type: integer
-                      example: 0
-                    normalizado_consulta_datahora:
-                      type: string
-                      example: "29/09/2023 13:16:08"
-                    normalizado_cpf:
-                      type: string
-                      example: "12345678901"
-                    normalizado_data_inscricao:
-                      type: string
-                      example: "11/11/1111"
-                    normalizado_data_nascimento:
-                      type: string
-                      example: "11/11/1111"
-                    origem:
-                      type: string
-                      example: "mobile"
-                    qrcode_url:
-                      type: string
-                      example: "https://www.exemplo.com/exemplo-de-url"
-                    situacao_cadastral:
-                      type: string
-                      example: "ATIVA"
-                    site_receipt:
-                      type: string
-                      example: "https://www.exemplo.com/exemplo-de-url"
+                type: object
+                properties:
+                  ano_obito:
+                    type: string
+                    example: null
+                  consulta_comprovante:
+                    type: string
+                    example: "1111.1111.1111.1111"
+                  consulta_datahora:
+                    type: string
+                    example: "29/09/2023 13:16:08"
+                  consulta_digito_verificador:
+                    type: string
+                    example: "00"
+                  cpf:
+                    type: string
+                    example: "123.456.789-01"
+                  data_inscricao:
+                    type: string
+                    example: "11/11/1111"
+                  data_nascimento:
+                    type: string
+                    example: "11/11/1111"
+                  nome:
+                    type: string
+                    example: "Exemplo de Nome"
+                  nome_civil:
+                    type: string
+                    example: "Exemplo de Nome Civil"
+                  nome_social:
+                    type: string
+                    example: "Exemplo de Nome Social"
+                  normalizado_ano_obito:
+                    type: integer
+                    example: 0
+                  normalizado_consulta_datahora:
+                    type: string
+                    example: "29/09/2023 13:16:08"
+                  normalizado_cpf:
+                    type: string
+                    example: "12345678901"
+                  normalizado_data_inscricao:
+                    type: string
+                    example: "11/11/1111"
+                  normalizado_data_nascimento:
+                    type: string
+                    example: "11/11/1111"
+                  qrcode_url:
+                    type: string
+                    example: "https://www.exemplo.com/exemplo-de-url"
+                  situacao_cadastral:
+                    type: string
+                    example: "ATIVA"
+                  site_receipt:
+                    type: string
+                    example: "https://www.exemplo.com/exemplo-de-url"
         400:
-          description: Requisição inválida, CPF não fornecido ou formato inválido
+          description: Requisição inválida, CPF ou birthdate não fornecidos ou formato inválido
