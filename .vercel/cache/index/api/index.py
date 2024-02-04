@@ -6,10 +6,11 @@ import os
 
 app = Flask(__name__)
 
+# configuração do CORS da aplicação
 cors = CORS(app, resources={
     r"/api/*": {
-       "origins": ["http://127.0.0.1:5001", "http://localhost:3000"],
-       "methods": ["GET", "POST"],  # Métodos permitidos
+       "origins": ["*"],
+       "methods": ["GET", "POST"], 
        "allow_headers": ["Content-Type", "Authorization"]
     }
 })

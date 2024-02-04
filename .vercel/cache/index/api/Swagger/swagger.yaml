@@ -24,7 +24,7 @@ info:
     Para mais informações e para começar a usar a API, visite nosso portal de desenvolvedores em [https://aivision-tech.com/](https://aivision-tech.com/).
 schemes:
   - https
-host: aivision-tech.com
+host: aivisiontech.com.br
 basePath: /apidocs
 paths:
   /consulta_cpf:
