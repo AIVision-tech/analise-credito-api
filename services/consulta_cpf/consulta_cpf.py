@@ -14,7 +14,7 @@ def consulta_cpf_externa(cpf, birthdate):
         'cpf': cpf,
         'birthdate': birthdate,
         'token': API_KEY,
-        'timeout': 300  # Você pode definir isso conforme necessário
+        'timeout': 300  
     }
 
     # Fazendo a solicitação POST com dados de formulário

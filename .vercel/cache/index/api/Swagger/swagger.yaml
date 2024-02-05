@@ -58,72 +58,125 @@ paths:
                 example: '1985-04-22'
       responses:
         200:
-          description: Informações do CPF consultado
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                example: 200
-              code_message:
-                type: string
-                example: "A requisição foi processada com sucesso."
-              data:
-                type: object
-                properties:
-                  ano_obito:
-                    type: string
-                    example: null
-                  consulta_comprovante:
-                    type: string
-                    example: "1111.1111.1111.1111"
-                  consulta_datahora:
-                    type: string
-                    example: "29/09/2023 13:16:08"
-                  consulta_digito_verificador:
-                    type: string
-                    example: "00"
-                  cpf:
-                    type: string
-                    example: "123.456.789-01"
-                  data_inscricao:
-                    type: string
-                    example: "11/11/1111"
-                  data_nascimento:
-                    type: string
-                    example: "11/11/1111"
-                  nome:
-                    type: string
-                    example: "Exemplo de Nome"
-                  nome_civil:
-                    type: string
-                    example: "Exemplo de Nome Civil"
-                  nome_social:
-                    type: string
-                    example: "Exemplo de Nome Social"
-                  normalizado_ano_obito:
-                    type: integer
-                    example: 0
-                  normalizado_consulta_datahora:
-                    type: string
-                    example: "29/09/2023 13:16:08"
-                  normalizado_cpf:
-                    type: string
-                    example: "12345678901"
-                  normalizado_data_inscricao:
-                    type: string
-                    example: "11/11/1111"
-                  normalizado_data_nascimento:
-                    type: string
-                    example: "11/11/1111"
-                  qrcode_url:
-                    type: string
-                    example: "https://www.exemplo.com/exemplo-de-url"
-                  situacao_cadastral:
-                    type: string
-                    example: "ATIVA"
-                  site_receipt:
-                    type: string
-                    example: "https://www.exemplo.com/exemplo-de-url"
+          description: "A requisição foi processada com sucesso."
         400:
           description: Requisição inválida, CPF ou birthdate não fornecidos ou formato inválido
+        600:
+          description: Um erro inesperado ocorreu e será analisado
+        601:
+          description: Não foi possível se autenticar com o token informado
+        602:
+          description: O serviço informado na URL não é válido
+        603:
+          description: O token informado não tem autorização de acesso ao serviço. Verifique se ele continua ativo e se ele não possui algum limite de uso especificado
+        604:
+          description: A consulta não foi validada antes de pesquisar a fonte de origem
+        605:
+          description: A consulta não foi realizada dentro do tempo de limite de timeout especificado
+        606:
+          description: Parâmetros obrigatórios não foram enviados. Por favor, verifique a documentação de uso do serviço
+        607:
+          description: Parâmetro(s) inválido(s)
+        608:
+          description: Os parâmetros foram recusados pelo site ou aplicativo de origem que processou esta consulta
+        609:
+          description: Tentativas de consultar o site ou aplicativo de origem excedidas
+        610:
+          description: Falha em resolver algum tipo de CAPTCHA
+        611:
+          description: Os dados estão incompletos no site ou aplicativo de origem e não puderam ser retornados
+        612:
+          description: A consulta não retornou dados no site ou aplicativo de origem no qual a automação foi executada
+        613:
+          description: A consulta foi bloqueada pelo servidor do site ou aplicativo de origem. Por favor, tente novamente
+        614:
+          description: Um erro inesperado com o site ou aplicativo de origem ocorreu. Por favor, tente novamente
+        615:
+          description: O site ou aplicativo de origem parece estar indisponível
+        617:
+          description: Contate o prestador de serviço. Há uma sobrecarga de uso do serviço
+        618:
+          description: O site ou aplicativo de origem está sobrecarregado. Tente novamente em alguns instantes
+        619:
+          description: O parâmetro enviado sofreu alterações no site ou aplicativo de origem. Verifique a alteração diretamente no site ou aplicativo de origem
+        620:
+          description: O site ou aplicativo de origem emitiu um erro que provavelmente não mudará em breve para esta consulta. Leia-o para saber mais
+        621:
+          description: Houve um erro ao tentar gerar o arquivo de visualização desta requisição
+        622:
+          description: Parece que você está tentando realizar a mesma consulta diversas vezes seguidas. Por favor, verifique se há algum problema em sua integração. Se acredita que está tudo certo, entre em contato com o suporte
+  /consulta_cnpj:
+      post:
+        summary: Consulta de CNPJ
+        description: |
+          Este endpoint realiza uma consulta detalhada do CNPJ fornecido, buscando informações relevantes para análise de crédito. Utilize este serviço para obter dados cadastrais atualizados e indicadores financeiros que auxiliam na avaliação de risco de crédito de pessoas físicas.
+        operationId: consultaCNPJ
+        tags:
+          - Consultas Básicas
+        consumes:
+          - application/json
+        produces:
+          - application/json
+        parameters:
+          - in: body
+            name: body
+            description: CNPJ a ser consultado
+            required: true
+            schema:
+              type: object
+              required:
+                - cnpj  
+              properties:
+                cnpj:
+                  type: string
+                  example: '12.456.789/0001-10'
+
+        responses:
+          200:
+            description: "A requisição foi processada com sucesso."
+          400:
+            description: Requisição inválida, CPF ou birthdate não fornecidos ou formato inválido
+          600:
+            description: Um erro inesperado ocorreu e será analisado
+          601:
+            description: Não foi possível se autenticar com o token informado
+          602:
+            description: O serviço informado na URL não é válido
+          603:
+            description: O token informado não tem autorização de acesso ao serviço. Verifique se ele continua ativo e se ele não possui algum limite de uso especificado
+          604:
+            description: A consulta não foi validada antes de pesquisar a fonte de origem
+          605:
+            description: A consulta não foi realizada dentro do tempo de limite de timeout especificado
+          606:
+            description: Parâmetros obrigatórios não foram enviados. Por favor, verifique a documentação de uso do serviço
+          607:
+            description: Parâmetro(s) inválido(s)
+          608:
+            description: Os parâmetros foram recusados pelo site ou aplicativo de origem que processou esta consulta
+          609:
+            description: Tentativas de consultar o site ou aplicativo de origem excedidas
+          610:
+            description: Falha em resolver algum tipo de CAPTCHA
+          611:
+            description: Os dados estão incompletos no site ou aplicativo de origem e não puderam ser retornados
+          612:
+            description: A consulta não retornou dados no site ou aplicativo de origem no qual a automação foi executada
+          613:
+            description: A consulta foi bloqueada pelo servidor do site ou aplicativo de origem. Por favor, tente novamente
+          614:
+            description: Um erro inesperado com o site ou aplicativo de origem ocorreu. Por favor, tente novamente
+          615:
+            description: O site ou aplicativo de origem parece estar indisponível
+          617:
+            description: Contate o prestador de serviço. Há uma sobrecarga de uso do serviço
+          618:
+            description: O site ou aplicativo de origem está sobrecarregado. Tente novamente em alguns instantes
+          619:
+            description: O parâmetro enviado sofreu alterações no site ou aplicativo de origem. Verifique a alteração diretamente no site ou aplicativo de origem
+          620:
+            description: O site ou aplicativo de origem emitiu um erro que provavelmente não mudará em breve para esta consulta. Leia-o para saber mais
+          621:
+            description: Houve um erro ao tentar gerar o arquivo de visualização desta requisição
+          622:
+            description: Parece que você está tentando realizar a mesma consulta diversas vezes seguidas. Por favor, verifique se há algum problema em sua integração. Se acredita que está tudo certo, entre em contato com o suporte
