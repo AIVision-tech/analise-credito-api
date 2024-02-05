@@ -1,38 +1,32 @@
-from flask import Flask, request, jsonify
-from flask_cors import CORS
-import requests
 import os
-
-app = Flask(__name__)
-
-CORS(app, resources={r"*": {"origins": "*"}})
-
-# Utiliza variáveis de ambiente para maior segurança
-API_KEY = os.getenv('API_KEY', 'Yi3azCld-UKGoRdnEZBVhsNvmZ5gsJcBZLR1ROLm')
-API_URL = 'https://api.infosimples.com/api/v2/consultas/receita-federal/cpf'
+import requests
+from flask import request, jsonify
 
 def consulta_cpf_externa(cpf, birthdate):
-    """
-    Faz a consulta do CPF na API da Infosimples.
-    """
-    headers = {
-        'Authorization': f'Token {API_KEY}',
-        'Content-Type': 'application/json'
-    }
-    payload = {
+    API_KEY = os.getenv('API_KEY')
+    if not API_KEY:
+        return {'error': 'Chave da API não configurada.'}, 500
+
+    API_URL = 'https://api.infosimples.com/api/v2/consultas/receita-federal/cpf'
+    
+    # Dados que serão enviados no corpo da solicitação
+    data = {
         'cpf': cpf,
-        'birthdate': birthdate
+        'birthdate': birthdate,
+        'token': API_KEY,
+        'timeout': 300  # Você pode definir isso conforme necessário
     }
-    response = requests.post(API_URL, json=payload, headers=headers)
+
+    # Fazendo a solicitação POST com dados de formulário
+    response = requests.post(API_URL, data=data)
     
     if response.status_code == 200:
-        return response.json()
+        return response.json(), 200
     else:
-        return {'error': 'Erro ao consultar CPF', 'status_code': response.status_code}
+        return {'error': 'Erro ao consultar CPF', 'status_code': response.status_code}, response.status_code
 
-@app.route('/consulta_cpf', methods=['POST'])
 def consulta_cpf_route():
-    data = request.get_json()  # Usa get_json() para melhor manipulação de erros de JSON malformado
+    data = request.get_json()
 
     cpf = data.get('cpf')
     birthdate = data.get('birthdate')
@@ -40,9 +34,6 @@ def consulta_cpf_route():
     if not cpf or not birthdate:
         return jsonify({"error": "CPF e/ou birthdate não fornecidos corretamente"}), 400
 
-    resultado = consulta_cpf_externa(cpf, birthdate)
+    resultado, status_code = consulta_cpf_externa(cpf, birthdate)
 
-    return jsonify(resultado)
-
-if __name__ == '__main__':
-    app.run(debug=True)
+    return jsonify(resultado), status_code

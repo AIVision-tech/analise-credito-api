@@ -1,20 +1,15 @@
-from flask import Flask, request, jsonify
-from flask_cors import CORS
-import requests
+# consulta_cpf.py
 import os
+import requests
 
-app = Flask(__name__)
-
-CORS(app, resources={r"*": {"origins": "*"}})
-
-# Utiliza variáveis de ambiente para maior segurança
-API_KEY = os.getenv('API_KEY', 'Yi3azCld-UKGoRdnEZBVhsNvmZ5gsJcBZLR1ROLm')
-API_URL = 'https://api.infosimples.com/api/v2/consultas/receita-federal/cpf'
-
+# A definição da função de consulta permanece a mesma
 def consulta_cpf_externa(cpf, birthdate):
     """
     Faz a consulta do CPF na API da Infosimples.
     """
+    API_KEY = os.getenv('API_KEY', 'Yi3azCld-UKGoRdnEZBVhsNvmZ5gsJcBZLR1ROLm')
+    API_URL = 'https://api.infosimples.com/api/v2/consultas/receita-federal/cpf'
+    
     headers = {
         'Authorization': f'Token {API_KEY}',
         'Content-Type': 'application/json'
@@ -30,9 +25,10 @@ def consulta_cpf_externa(cpf, birthdate):
     else:
         return {'error': 'Erro ao consultar CPF', 'status_code': response.status_code}
 
-@app.route('/consulta_cpf', methods=['POST'])
 def consulta_cpf_route():
-    data = request.get_json()  # Usa get_json() para melhor manipulação de erros de JSON malformado
+    from flask import request, jsonify  # Importe local para evitar dependências circulares
+    
+    data = request.get_json()
 
     cpf = data.get('cpf')
     birthdate = data.get('birthdate')
@@ -43,6 +39,3 @@ def consulta_cpf_route():
     resultado = consulta_cpf_externa(cpf, birthdate)
 
     return jsonify(resultado)
-
-if __name__ == '__main__':
-    app.run(debug=True)
