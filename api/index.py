@@ -5,6 +5,7 @@ from flasgger import Swagger
 import yaml
 import os
 from services.consulta_cpf import consulta_cpf_route
+from services.consulta_cnpj import consulta_cnpj_route
 
 
 
@@ -42,8 +43,11 @@ swagger = Swagger(app, template=swagger_template)
 def index():
     return redirect("/apidocs/")
 
-# Registro da rota de consulta CPF
+
 app.add_url_rule('/apidocs/consulta_cpf', view_func=consulta_cpf_route, methods=['POST'])
+app.add_url_rule('/apidocs/consulta_cnpj', view_func=consulta_cnpj_route, methods=['POST'])
+
+
 
 port = int(os.environ.get("PORT", 5001))
 

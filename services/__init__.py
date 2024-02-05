@@ -1,1 +1,2 @@
 from .consulta_cpf.consulta_cpf import consulta_cpf_route
+from .consulta_cnpj.consulta_cnpj import consulta_cnpj_route

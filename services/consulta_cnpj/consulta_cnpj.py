@@ -2,7 +2,7 @@ import os
 import requests
 from flask import request, jsonify
 
-def consulta_cnpj_externa(cnpj, mobile_sem_login):
+def consulta_cnpj_externa(cnpj):
     API_KEY = os.getenv('API_KEY')
     if not API_KEY:
         return {'error': 'Chave da API não configurada.'}, 500
@@ -13,7 +13,6 @@ def consulta_cnpj_externa(cnpj, mobile_sem_login):
     data = {
         'cnpj': cnpj,
         'token': API_KEY,
-        'mobile_sem_login': 0,  
         'timeout': 300,
     }
 
