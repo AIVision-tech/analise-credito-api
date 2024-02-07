@@ -3,13 +3,6 @@ import requests
 from datetime import datetime
 from flask import request, jsonify
 
-
-def formatar_data(data_string):
-    data_obj = datetime.strptime(data_string, '%d/%m/%Y')
-    data_formatada = data_obj.strftime('%Y-%m-%d')
-    return data_formatada
-
-
 def consulta_cpf_externa(cpf, birthdate):
     API_KEY = os.getenv('API_KEY')
     if not API_KEY:
@@ -37,13 +30,17 @@ def consulta_cpf_route():
     data = request.get_json()
 
     cpf = data.get('cpf')
-    birthdate_str = data.get('birthdate')
+    birthdate = data.get('birthdate')
 
     if not cpf or not birthdate:
         return jsonify({"error": "CPF e/ou birthdate não fornecidos corretamente"}), 400
 
-    birthdate = formatar_data(birthdate_str)
+    # Converter a data de dd/mm/yyyy para yyyy-mm-dd
+    try:
+        birthdate_converted = datetime.strptime(birthdate, "%d/%m/%Y").strftime("%Y-%m-%d")
+    except ValueError:
+        return jsonify({"error": "Formato de data inválido. Use dd/mm/yyyy."}), 400
 
-    resultado, status_code = consulta_cpf_externa(cpf, birthdate)
+    resultado, status_code = consulta_cpf_externa(cpf, birthdate_converted)
 
     return jsonify(resultado), status_code
