@@ -1,6 +1,14 @@
 import os
 import requests
+from datetime import datetime
 from flask import request, jsonify
+
+
+def formatar_data(data_string):
+    data_obj = datetime.strptime(data_string, '%d/%m/%Y')
+    data_formatada = data_obj.strftime('%Y-%m-%d')
+    return data_formatada
+
 
 def consulta_cpf_externa(cpf, birthdate):
     API_KEY = os.getenv('API_KEY')
@@ -29,10 +37,12 @@ def consulta_cpf_route():
     data = request.get_json()
 
     cpf = data.get('cpf')
-    birthdate = data.get('birthdate')
+    birthdate_str = data.get('birthdate')
 
     if not cpf or not birthdate:
         return jsonify({"error": "CPF e/ou birthdate não fornecidos corretamente"}), 400
+
+    birthdate = formatar_data(birthdate_str)
 
     resultado, status_code = consulta_cpf_externa(cpf, birthdate)
 

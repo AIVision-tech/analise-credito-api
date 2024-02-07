@@ -55,7 +55,7 @@ paths:
                 example: '123.456.789-01'
               birthdate:
                 type: string
-                example: '1985-04-22'
+                example: '12/12/1992'
       responses:
         200:
           description: "A requisição foi processada com sucesso."
